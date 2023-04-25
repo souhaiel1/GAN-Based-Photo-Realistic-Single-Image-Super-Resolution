@@ -29,18 +29,21 @@ The architecture of the SRGAN model consists of a  deep generator network $G$, w
 
 ## Our Perceptual Loss and training process 
 The main contribution introduced by authors of the SRGAN paper is the use of the GAN architecture and the introduction of a novel perceptual loss function that consists of an adversarial loss and a content loss based on VGG's feature maps. This loss function is proved to be much better than MSE at capturing perceptually relevant differences.
+
 $$l^{SR}= \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss}$$ 
+
 
 Where The generative loss $l_{SR}^{Gen}$ is defined based on the probabilities of the discriminator $D_{\theta_D}(G_{\theta_G}(I_{LR}))$ over all training samples as:
 
 $$l^{SR}_{Gen} = -\sum_{n=1}^N \log D_{\theta_D}(G_{\theta_G}(I^{LR}))$$
-Our approach consisted of implementing the SRGAN architecture proposed by the authors while making changes on the perceptual loss function and the training process. \\
+
+Our approach consisted of implementing the SRGAN architecture proposed by the authors while making changes on the perceptual loss function and the training process. 
 
 **Modified perceptual loss function for SRGAN**
 
 Through intuition and experimentation, we introduce the following perceptual loss function: 
 $$l^{SR}_{modified}= \underbrace{l^_{MSE}^{SR}}_{pixel 
-\ loss}+ \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss} + \underbrace{2.10^{-8}l_{TV}^{SR}}_{total \ variation} $$ \\
+\ loss}+ \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss} + \underbrace{2.10^{-8}l_{TV}^{SR}}_{total \ variation}$$ 
 
 **Intituition:**
 
