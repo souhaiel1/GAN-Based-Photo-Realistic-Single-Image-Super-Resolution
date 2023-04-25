@@ -53,7 +53,7 @@ $$l^{SR}_{modified}= \underbrace{l^{MSE}_{SR}}_{pixel loss}+ \underbrace{6.10^{-
 
 ## Tweaking the pre-training process**
 
-Instead of pre-training the Generator network using MSE loss like the authors did, we experimented with a \textbf{weighted MSE }and $\bm{L1}$  \textbf{loss}, which both yielded better results than MSE from a human viewer's perspective, and settled for the latter.
+Instead of pre-training the Generator network using MSE loss like the authors did, we experimented with a **weighted MSE** and $L1$  **loss**, which both yielded better results than MSE from a human viewer's perspective, and settled for the latter.
 Intuitively, this is because MSE is  sensitive to outliers, which can result in overly-smoothed solutions and loss of fine details in the image. In contrast, MAE gives more weight to small differences between the predicted image and the ground truth image, allowing for better preservation of the high-frequency details in the $SR$ image. In addition, MAE is a more robust loss function for handling the non-linear mapping from the low-resolution input image to the high-resolution output image. By minimizing the absolute differences between the predicted and ground truth images, the generator is able to learn more effectively and produce higher quality super-resolved images.
 For the most part, we follow the same training process described by the authors in the paper.
 We trained our model for $850 \ epochs$ and used the following setting of hyperparameters:
