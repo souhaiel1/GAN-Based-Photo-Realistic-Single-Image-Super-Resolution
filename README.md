@@ -43,8 +43,7 @@ Our approach consisted of implementing the SRGAN architecture proposed by the au
 
 Through intuition and experimentation, we introduce the following perceptual loss function:
 
-$$l^{SR}_{modified}= \underbrace{l^_{MSE}^{SR}}_{pixel 
-\ loss}+ \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss} + \underbrace{2.10^{-8}l_{TV}^{SR}}_{total \ variation}$$ 
+$$l^{SR}_{modified}= \underbrace{l^_{MSE}^{SR}}_{pixel loss}+ \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss} + \underbrace{2.10^{-8}l_{TV}^{SR}}_{total \ variation}$$ 
 
 **Intituition:**
 
