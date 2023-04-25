@@ -83,7 +83,7 @@ Using our own implementation of the discussed quality metrics, we evaluate and c
 From the qualitative results displayed in the table below, we can see that our SRGAN model compares fairly well with the results of the authors of the original SRGAN paper who used a much larger training set (350k images sampled from ImageNet) and trained their model for much longer.  We can also see the superiority of the ESRGAN model in each case. Indedd the enhanced architecture and the subtle but important technical modifications the authors introduced seem to be improve the results quantitatively. However, it is unclear to me if this improvement over previous methods is mostly thanks to the subtle architectural and theoretical changes or the sheer fact that the generator network of ESRGAN is much deeper and involves much more convolutions.\\
 Note that for ground-truth HR images, $PSNR= \infty$ and $SSIM = 1$
 
-## Performance of the two methods
+
 
 |         | **SRGAN (ours)** | **SRGAN (Ledig et al)** | **ESRGAN** |
 | :-----: | :--------------: | :---------------------: | :-------: |
@@ -97,6 +97,11 @@ Note that for ground-truth HR images, $PSNR= \infty$ and $SSIM = 1$
 | PSNR    |     23.770       |           26.02          |   26.614  |
 | SSIM    |     0.636        |          0.7397          |   0.713   |
 
+
+
+Qualitative results are in accordance with the results we got using the analytical quality measures. 
+In fact, our  qualitative results demonstrate the ability of SRGAN in retrieving fine details and textures that were missing in the original low-resolution images. The high-resolution images produced by SRGAN show sharp and well-defined edges and feature relatively smooth transitions in color and texture. Overall, our results confirm the effectiveness of proposed perceptual loss and pre-training procedure. However, the results are not perfect or as good as ESRGAN's. This is expected since we only trained our model for 850 epochs on a relatively small dataset. \\
+On the other hand, ESRGAN exhibits very good performance in producing super-resolved images with rich details and textures. The generated images have high perceptual quality (from a human's point of view) and surpass the ones produced by SRGAN. The enhanced performance of ESRGAN can be attributed to its more robust discriminator that utilizes a relativistic approach to evaluate the realism of the generated images, the subtle changes made in the loss function and architecture or the fact that it is a much more deeper network. 
 
 <p align="center">
 <img src="https://github.com/souhaiel1/GAN-Based-Photo-Realistic-Single-Image-Super-Resolution/blob/main//images/comparaison.jpg" />
