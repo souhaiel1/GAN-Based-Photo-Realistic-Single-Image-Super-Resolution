@@ -107,4 +107,10 @@ On the other hand, ESRGAN exhibits very good performance in producing super-reso
 <img src="https://github.com/souhaiel1/GAN-Based-Photo-Realistic-Single-Image-Super-Resolution/blob/main//images/comparaison.jpg" />
 </p>
 
+## Discussion
 
+we assessed the effectiveness of SRGAN and ESRGAN (mostly SRGAN) on the DIV2K dataset and other benchmarking sets. Both networks showed improvement over the traditional interpolation methods as well as previous state-of-the-art super-resolution methods.
+The use of perceptual loss and deep residual learning in both SRGAN and ESRGAN have proven to be effective in super-resolving images, and the use of pre-trained VGG network in SRGAN has shown to be effective in capturing the high-level feature similarities between the super-resolved and ground truth images. However, the comparison between the two networks has shown that ESRGAN performs better than SRGAN in terms of both quantitative metrics (PSNR, SSIM) and visual quality.
+
+Moreover, using a modified version of the perceptual loss function proposed by Ledig et al, our SRGAN model performs reasonably well on the benchmark datasets and so does ESRGAN, especially given the relatively low number of epochs that we used given that SR methods and  GAN-based models in generals require a lot of training time . We intend to continue with the training of ESRGAN on DIV2K and re-traing SRGAN for longer time and with a heavy augmentation pipeline as for this project, no augmentations were applied except a center crop. Allso exploring different datasets can prove to benificial.
+We also intend to explore multi-frame super resolution methods like the one presented google's burt super-resolution work. These methods rely on fusing images of the same sceneg enerated by hand movements or intentional camera hardware movements, and merge their information to obtain a higher resolution image. 
