@@ -28,23 +28,25 @@ The architecture of the SRGAN model consists of a  deep generator network $G$, w
 </p>
 
 ## Our Perceptual Loss and training process 
-The main contribution introduced by authors of the SRGAN paper is the use of the GAN architecture and the introduction of a novel perceptual loss function that consists of an adversarial loss and a content loss based on VGG's feature maps. This loss function is proved to be much better than MSE at capturing perceptually relevant differences. $$l^{SR}= \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss}$$ 
+The main contribution introduced by authors of the SRGAN paper is the use of the GAN architecture and the introduction of a novel perceptual loss function that consists of an adversarial loss and a content loss based on VGG's feature maps. This loss function is proved to be much better than MSE at capturing perceptually relevant differences.
+$$l^{SR}= \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss}$$ 
+
 Where The generative loss $l_{SR}^{Gen}$ is defined based on the probabilities of the discriminator $D_{\theta_D}(G_{\theta_G}(I_{LR}))$ over all training samples as:
 
 $$l^{SR}_{Gen} = -\sum_{n=1}^N \log D_{\theta_D}(G_{\theta_G}(I^{LR}))$$
 Our approach consisted of implementing the SRGAN architecture proposed by the authors while making changes on the perceptual loss function and the training process. \\
 
-\noindent \textbf{Modified perceptual loss function for SRGAN:}\\
+**Modified perceptual loss function for SRGAN**
 
-\noindent  through intuition and experimentation, we introduce the following perceptual loss function: 
+Through intuition and experimentation, we introduce the following perceptual loss function: 
 $$l^{SR}_{modified}= \underbrace{l^_{MSE}^{SR}}_{pixel 
 \ loss}+ \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss} + \underbrace{2.10^{-8}l_{TV}^{SR}}_{total \ variation} $$ \\
 
-\textbf{Intituition:} 
-\begin{itemize}
-    \item We introduce MSE loss to penalize the differences in pixel space which ultimately leads to more accurate color fidelity between  $I^{SR}$ and $I^{HR}$. By minimizing this difference, the super-resolved image can achieve accurate color fidelity with the ground truth image. In addition to the adversarial loss and perceptual loss, MSE loss can provide a more direct control of the image quality and is computationally efficient to compute. Therefore, the introduction of MSE loss in our model can lead to improved image quality and greater fidelity between the super-resolved image and the ground truth image in terms of pixel-wise similarity.
-    \item Inspired by style transfer GANs \cite{sgan}, we introduce TV loss to reduce noise in$I^{SR}$. TV loss acts as a regularization term that measures the overall variation of intensities in the image, promoting spatial smoothness and reducing noise. In the context of SISR, the introduction of TV loss can improve the quality of the super-resolved image by reducing the noise that may arise from the low-resolution input image. However, since TV loss can also lead to smoothing of textures in the image, we used a very low weight  its loss component to avoid crashing textures during the super-resolution process. This allows for better preservation of the high-frequency details in the super-resolved image, while still benefiting from the noise reduction provided by the TV loss.
-\end{itemize}
+**Intituition:**
+
+- We introduce MSE loss to penalize the differences in pixel space which ultimately leads to more accurate color fidelity between  $I^{SR}$ and $I^{HR}$. By minimizing this difference, the super-resolved image can achieve accurate color fidelity with the ground truth image. In addition to the adversarial loss and perceptual loss, MSE loss can provide a more direct control of the image quality and is computationally efficient to compute. Therefore, the introduction of MSE loss in our model can lead to improved image quality and greater fidelity between the super-resolved image and the ground truth image in terms of pixel-wise similarity.
+- Inspired by style transfer GANs, we introduce TV loss to reduce noise in $I^{SR}$. TV loss acts as a regularization term that measures the overall variation of intensities in the image, promoting spatial smoothness and reducing noise. In the context of SISR, the introduction of TV loss can improve the quality of the super-resolved image by reducing the noise that may arise from the low-resolution input image. However, since TV loss can also lead to smoothing of textures in the image, we used a very low weight  its loss component to avoid crashing textures during the super-resolution process. This allows for better preservation of the high-frequency details in the super-resolved image, while still benefiting from the noise reduction provided by the TV loss.
+
 
 
 ## Results 
