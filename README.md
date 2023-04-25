@@ -68,8 +68,52 @@ We trained our model for $850 \ epochs$ and used the following setting of hyperp
 - adversarial\_loss\_coef = 0.001: The coefficient for the adversarial loss used during training.
 - vgg\_loss\_coef = 0.006: The coefficient for the VGG loss used during training.
 
+## Datasets 
+
+The models were trained on the DIV2K dataset that contains: 
+
+- 1600 training images of different sizes divided into 800 high resolution images and their corresponding x4 down-scaled and bicubic-interpolated low resolution images.
+- 200 test images divided into 100 high resolution images and their corresponding low resolution counterparts.
+
+In addition to DIV2K's test set, we also evaluated our models on the Set5 and Set14 benchmark datasets.The performance of the models was evaluated using various quantitative metrics such as peak signal-to-noise ratio (PSNR), structural similarity (SSIM), and visual quality.
 
 ## Results 
+
+Using our own implementation of the discussed quality metrics, we evaluate and compare our SRGAN with the results of the original SRGAN paper and our ESRGAN.
+From the qualitative results displayed in the table below, we can see that our SRGAN model compares fairly well with the results of the authors of the original SRGAN paper who used a much larger training set (350k images sampled from ImageNet) and trained their model for much longer.  We can also see the superiority of the ESRGAN model in each case. Indedd the enhanced architecture and the subtle but important technical modifications the authors introduced seem to be improve the results quantitatively. However, it is unclear to me if this improvement over previous methods is mostly thanks to the subtle architectural and theoretical changes or the sheer fact that the generator network of ESRGAN is much deeper and involves much more convolutions.\\
+Note that for ground-truth HR images, $PSNR= \infty$ and $SSIM = 1$
+\begin{center}
+.Performance of the two methods\\[10pt]
+
+\begin{tabular}{l*{5}{c}r}
+DIV2K              & SRGAN(ours) & SRGAN (Ledig et al) & ESRGAN  \\
+\hline
+PSNR  & 25.373 &- & 28.174   \\
+SSIM            & 0.706 &-& 0.775  \\
+
+\end{tabular}
+\\\newline
+\vspace*{0.5 cm}
+\newline
+\begin{tabular}{l*{5}{c}r}
+Set5              & \hphantom{SRGAN(ours)} & \hphantom{SRGAN(Ledig et al)} & \hphantom{ESRGAN}   \\
+\hline
+PSNR  & 24.945 & 29.40 & 30.474   \\
+ SSIM            & 0.718 &0.8472& 0.851   \\
+\end{tabular}
+\\\newline
+\vspace*{0.5 cm}
+\newline
+\begin{tabular}{l*{5}{c}r}
+Set14       & \hphantom{SRGAN(ours)} & \hphantom{SRGAN(Ledig et al)} & \hphantom{ESRGAN}    \\
+\hline
+PSNR  &  23.770 &26.02& 26.614   \\
+SSIM            & 0.636&0.7397 & 0.713  \\
+
+
+\end{tabular}\\[0.3cm]
+\end{center}
+
 <p align="center">
 <img src="https://github.com/souhaiel1/GAN-Based-Photo-Realistic-Single-Image-Super-Resolution/blob/main//images/comparaison.jpg" />
 </p>
