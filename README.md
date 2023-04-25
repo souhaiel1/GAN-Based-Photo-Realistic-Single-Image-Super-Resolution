@@ -7,7 +7,7 @@ state-of-the-art super resolution networks, including feature extraction, featur
 while exploring the different training strategies and loss functions that have been proposed to enhance the performance of super resolution models. Furthermore, we 
 provide an overview of benchmark datasets and evaluation metrics for our super resolution models. 
 
-## SRGAN Model : 
+## SRGAN Model
 
 The primary objective is to train a generative function $G$ that can accurately estimate the corresponding high-resolution (HR) counterpart for any given low-resolution (LR) input image. \\
 The authors use generative function $G$, which is a feed-forward convolutional neural network, specifically, a deep $ResNet$ (SRReset) parametrized by $\theta_G$. Where, $\theta_G = \{W_{1:L}; b_{1:L}\}$ are the weights and biases of an L-layer deep network. We optimize a super-resolution specific perceptual loss function $l_{SR}$ to obtain $\theta_G$. The generator function is trained on a set of training images ${I_{HR_n}, I_{LR_n}}$, where $n = 1, ..., N$ (N = 800 for DIV2K).\\
@@ -26,3 +26,10 @@ The architecture of the SRGAN model consists of a  deep generator network $G$, w
 <p align="center">
 <img src="https://github.com/souhaiel1/GAN-Based-Photo-Realistic-Single-Image-Super-Resolution/blob/main//images/srganarch.PNG" />
 </p>
+
+## Results 
+<p align="center">
+<img src="https://github.com/souhaiel1/GAN-Based-Photo-Realistic-Single-Image-Super-Resolution/blob/main//images/comparaison.jpg" />
+</p>
+
+
