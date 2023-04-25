@@ -83,17 +83,20 @@ Using our own implementation of the discussed quality metrics, we evaluate and c
 From the qualitative results displayed in the table below, we can see that our SRGAN model compares fairly well with the results of the authors of the original SRGAN paper who used a much larger training set (350k images sampled from ImageNet) and trained their model for much longer.  We can also see the superiority of the ESRGAN model in each case. Indedd the enhanced architecture and the subtle but important technical modifications the authors introduced seem to be improve the results quantitatively. However, it is unclear to me if this improvement over previous methods is mostly thanks to the subtle architectural and theoretical changes or the sheer fact that the generator network of ESRGAN is much deeper and involves much more convolutions.\\
 Note that for ground-truth HR images, $PSNR= \infty$ and $SSIM = 1$
 
-|     | SRGAN (ours) | SRGAN (Ledig et al) | ESRGAN |
-| --- | --- | --- | --- |
-| **DIV2K** | | | |
-| PSNR | 25.373 | - | 28.174 |
-| SSIM | 0.706 | - | 0.775 |
-| **Set5** | | | |
-| PSNR | 24.945 | 29.40 | 30.474 |
-| SSIM | 0.718 | 0.8472 | 0.851 |
-| **Set14** | | | |
-| PSNR | 23.770 | 26.02 | 26.614 |
-| SSIM | 0.636 | 0.7397 | 0.713 |
+## Performance of the two methods
+
+|         | **SRGAN (ours)** | **SRGAN (Ledig et al)** | **ESRGAN** |
+| :-----: | :--------------: | :---------------------: | :-------: |
+| **DIV2K**  |        |             |         |
+| PSNR    |     25.373       |             -            |   28.174  |
+| SSIM    |     0.706        |             -            |   0.775   |
+| **Set5**   |        |             |         |
+| PSNR    |     24.945       |           29.40          |   30.474  |
+| SSIM    |     0.718        |          0.8472          |   0.851   |
+| **Set14**  |        |             |         |
+| PSNR    |     23.770       |           26.02          |   26.614  |
+| SSIM    |     0.636        |          0.7397          |   0.713   |
+
 
 <p align="center">
 <img src="https://github.com/souhaiel1/GAN-Based-Photo-Realistic-Single-Image-Super-Resolution/blob/main//images/comparaison.jpg" />
