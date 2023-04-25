@@ -39,9 +39,10 @@ $$l^{SR}_{Gen} = -\sum_{n=1}^N \log D_{\theta_D}(G_{\theta_G}(I^{LR}))$$
 
 Our approach consisted of implementing the SRGAN architecture proposed by the authors while making changes on the perceptual loss function and the training process. 
 
-**Modified perceptual loss function for SRGAN**
+**Modified perceptual loss function for SRGAN:**
 
-Through intuition and experimentation, we introduce the following perceptual loss function: 
+Through intuition and experimentation, we introduce the following perceptual loss function:
+
 $$l^{SR}_{modified}= \underbrace{l^_{MSE}^{SR}}_{pixel 
 \ loss}+ \underbrace{6.10^{-3}l_{VGG/5,4}^{SR}}_{content \ loss} + \underbrace{10^{-3} l_{Gen}^{SR}}_{adversarial \ loss} + \underbrace{2.10^{-8}l_{TV}^{SR}}_{total \ variation}$$ 
 
@@ -50,6 +51,23 @@ $$l^{SR}_{modified}= \underbrace{l^_{MSE}^{SR}}_{pixel
 - We introduce MSE loss to penalize the differences in pixel space which ultimately leads to more accurate color fidelity between  $I^{SR}$ and $I^{HR}$. By minimizing this difference, the super-resolved image can achieve accurate color fidelity with the ground truth image. In addition to the adversarial loss and perceptual loss, MSE loss can provide a more direct control of the image quality and is computationally efficient to compute. Therefore, the introduction of MSE loss in our model can lead to improved image quality and greater fidelity between the super-resolved image and the ground truth image in terms of pixel-wise similarity.
 - Inspired by style transfer GANs, we introduce TV loss to reduce noise in $I^{SR}$. TV loss acts as a regularization term that measures the overall variation of intensities in the image, promoting spatial smoothness and reducing noise. In the context of SISR, the introduction of TV loss can improve the quality of the super-resolved image by reducing the noise that may arise from the low-resolution input image. However, since TV loss can also lead to smoothing of textures in the image, we used a very low weight  its loss component to avoid crashing textures during the super-resolution process. This allows for better preservation of the high-frequency details in the super-resolved image, while still benefiting from the noise reduction provided by the TV loss.
 
+
+## Tweaking the pre-training process**
+
+Instead of pre-training the Generator network using MSE loss like the authors did, we experimented with a \textbf{weighted MSE }and $\bm{L1}$  \textbf{loss}, which both yielded better results than MSE from a human viewer's perspective, and settled for the latter.
+Intuitively, this is because MSE is  sensitive to outliers, which can result in overly-smoothed solutions and loss of fine details in the image. In contrast, MAE gives more weight to small differences between the predicted image and the ground truth image, allowing for better preservation of the high-frequency details in the $SR$ image. In addition, MAE is a more robust loss function for handling the non-linear mapping from the low-resolution input image to the high-resolution output image. By minimizing the absolute differences between the predicted and ground truth images, the generator is able to learn more effectively and produce higher quality super-resolved images.
+For the most part, we follow the same training process described by the authors in the paper.
+We trained our model for $850 \ epochs$ and used the following setting of hyperparameters:
+
+- LR\_CROPPED\_SIZE = 24: The size of the low-resolution cropped input image used for training.
+- UPSCALE = 4: The upscaling factor used to generate the high-resolution output image from the low-resolution input image.
+- HR\_CROPPED\_SIZE = UPSCALE * LR\_CROPPED\_SIZE: The size of the high-resolution cropped output image used for training.
+- BATCH\_SIZE = 16: The number of image samples in each mini-batch during training.
+- EPOCHS = 50: The number of epochs (i.e., complete passes through the training dataset) used for training.
+- LR = 0.0001: The learning rate used for training the model.
+- BETAS = (0.5, 0.9): The values of the beta1 and beta2 hyperparameters used by the Adam optimizer during training.
+- adversarial\_loss\_coef = 0.001: The coefficient for the adversarial loss used during training.
+- vgg\_loss\_coef = 0.006: The coefficient for the VGG loss used during training.
 
 
 ## Results 
