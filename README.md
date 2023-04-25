@@ -16,7 +16,7 @@ $$\hat{\theta_G} = \arg \min_{\theta_G} \frac{1}{N}\sum_{n=1}^{N} l^{SR}(G_{\the
 
 We introduce a discriminator network $D_{\theta_D}$, which is optimized in an alternating manner with $G_{\theta_G}$ to solve the adversarial min-max problem. This problem aims to find the optimal values of $\theta_G$ and $\theta_D$ that can generate super-resolved images that are indistinguishable from the high-resolution images in the training set. The objective function for this problem is defined as follows:
 
-##\min_{\theta_G}\max_{\theta_D} E_{I^{HR} \sim p_{train}(I^{HR})} [\log D_{\theta_D}(I^{HR})] + \\
+$$\min_{\theta_G}\max_{\theta_D} E_{I^{HR} \sim p_{train}(I^{HR})} [\log D_{\theta_D}(I^{HR})] + \\
                     E_{I^{LR} \sim p_{G}(I^{LR})} [\log (1 - D_{\theta_D}(G_{\theta_G}(I^{LR})))] \ \ \ \ \ \  \ $$
 
 
